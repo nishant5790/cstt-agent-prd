@@ -1,0 +1,165 @@
+# =========================================================
+# 1. Byte-compiled / optimized files
+# =========================================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================================================
+# 2. C extensions / compiled binaries
+# =========================================================
+*.so
+*.pyd
+*.dll
+
+# =========================================================
+# 3. Distribution / packaging
+# =========================================================
+.Python
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# =========================================================
+# 4. Virtual environments (VERY IMPORTANT)
+# =========================================================
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# =========================================================
+# 5. Logs & temporary files
+# =========================================================
+*.log
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# =========================================================
+# 6. Test / coverage outputs
+# =========================================================
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+.hypothesis/
+
+# =========================================================
+# 7. Type checker / lint caches
+# =========================================================
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# =========================================================
+# 8. Jupyter Notebook
+# =========================================================
+.ipynb_checkpoints/
+
+# =========================================================
+# 9. IDE / Editor files
+# =========================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# =========================================================
+# 10. OS-specific files
+# =========================================================
+.DS_Store
+Thumbs.db
+
+# =========================================================
+# 11. Environment & secrets (CRITICAL for security)
+# =========================================================
+.env
+.env.*
+secret.json
+*.key
+*.pem
+
+# =========================================================
+# 12. Framework-specific (optional)
+# =========================================================
+
+# Django
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Flask
+instance/
+.webassets-cache
+
+# =========================================================
+# 13. Documentation build
+# =========================================================
+docs/_build/
+
+# =========================================================
+# 14. AI / Data / ML (important for your use case)
+# =========================================================
+*.csv
+*.tsv
+*.parquet
+*.h5
+*.ckpt
+*.pt
+*.onnx
+*.pkl
+
+# Large data or artifacts
+data/
+artifacts/
+models/
+
+# =========================================================
+# 15. Docker / Kubernetes
+# =========================================================
+*.pid
+*.seed
+*.log
+docker-compose.override.yml
+
+# =========================================================
+# 16. Misc
+# =========================================================
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+.idea/
+.vscode/
+.venv/
+.pytest_cache/
+__pycache__/
