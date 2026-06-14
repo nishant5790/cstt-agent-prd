@@ -1,0 +1,67 @@
+# CSTT Agent Studio — full stack (frontend + backend + redis).
+#
+# Local usage:
+#   docker compose up --build
+#   open http://localhost:8080
+#
+# Build/push images to a registry (e.g. ACR) for Container Apps:
+#   REGISTRY=myregistry.azurecr.io TAG=v1 docker compose build
+#   az acr login -n myregistry && REGISTRY=myregistry.azurecr.io TAG=v1 docker compose push
+#
+# Secrets/keys are read from backend/.env (Azure OpenAI, Doc Intelligence, etc.).
+# State is kept in Redis so it survives backend restarts.
+
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    image: ${REGISTRY:-cstt}/cstt-backend:${TAG:-local}
+    env_file: ./backend/.env
+    environment:
+      # Persist session/workspace state in Redis instead of process memory.
+      - STATE_BACKEND=redis
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_NAMESPACE=cstt
+      # Builds run in-process via the API (no separate Service Bus worker).
+      - QUEUE_BACKEND=local
+      # Uploaded files / generated decks live on a mounted volume.
+      - STORAGE_BACKEND=local
+      - CORS_ORIGINS=http://localhost:8080
+    volumes:
+      - backend-data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Empty base → same-origin /api + /health, proxied to backend by nginx.
+        VITE_API_BASE: ""
+    image: ${REGISTRY:-cstt}/cstt-frontend:${TAG:-local}
+    environment:
+      # nginx proxies /api + /health here (overridden to the backend's internal
+      # FQDN in Azure Container Apps).
+      - BACKEND_URL=http://backend:8000
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  backend-data:

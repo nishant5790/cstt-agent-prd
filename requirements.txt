@@ -1,0 +1,38 @@
+# Core dependencies
+pydantic>=2.6
+python-dotenv>=1.0
+python-pptx>=0.6.23
+certifi>=2024.2
+
+# FastAPI & Web
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+aiofiles>=23.2
+
+# Azure Services
+openai>=1.40
+azure-ai-documentintelligence>=1.0
+azure-storage-blob>=12.20
+azure-search-documents>=11.5
+azure-identity>=1.15
+
+# File processing
+openpyxl>=3.1
+pypdf>=4.0
+python-docx>=0.8.11
+markdown2>=2.4.10
+
+# Media processing
+imageio-ffmpeg>=0.4.9
+numpy>=1.26
+Pillow>=10.0
+openai-whisper>=20231117
+
+# Utilities
+jira>=3.13  # For Jira integration
+requests>=2.31
+python-dateutil>=2.8
+
+# Logging and monitoring
+python-json-logger>=2.0

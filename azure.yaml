@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+# Azure Developer CLI (azd) manifest for CSTT Agent Studio.
+#
+#   azd auth login
+#   azd up        # provisions infra (infra/main.bicep) + builds & pushes images
+#                 # to ACR + deploys both Container Apps
+#
+# Required azd env values (azd env set KEY value) — see infra/main.parameters.json:
+#   AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY,
+#   AZURE_OPENAI_DEPLOYMENT (default gpt-4o),
+#   AZURE_OPENAI_EMBEDDING_DEPLOYMENT (default text-embedding-ada-002),
+#   AZURE_OPENAI_API_VERSION (default 2024-10-21),
+#   JWT_SECRET (>=32 chars)
+name: cstt-agent-studio
+metadata:
+  template: cstt-agent-studio@1.0.0
+
+services:
+  backend:
+    project: ./backend
+    language: docker
+    host: containerapp
+    docker:
+      path: Dockerfile
+      context: .
+  frontend:
+    project: ./frontend
+    language: docker
+    host: containerapp
+    docker:
+      path: Dockerfile
+      context: .
