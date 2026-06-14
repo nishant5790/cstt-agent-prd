@@ -1,0 +1,7 @@
+  worker:
+    build: .
+    command: python worker.py
+    env_file: .env
+    environment:
+      - QUEUE_BACKEND=local
+    restart: unless-stopped
